@@ -9,3 +9,6 @@ dependencies:
   - migrate_plus
   - migrate_source_csv
   - migrate_tools
+
+# It will be added automatically by the packager on drupal.org.
+version: 1.0
