@@ -1,0 +1,48 @@
+id: d7migrate
+label: Custom user migration
+migration_group: d7migrate
+
+# define a forced module dependency. this will cause the migration definition to be reloaded
+# when you uninstall and reinstall your custom module.
+dependencies:
+  enforced:
+    module:
+      - d7migrate
+
+source:
+  plugin: d7migrate
+  # The "target" here refers to the database connection where the source data lives.
+  # You will need to configure this database in your settings.php.
+  target: migrate
+
+destination:
+  plugin: entity:user
+
+process:
+  # Field mappings and transformations will go here. We will get to this in a minute.
+  uid: uid
+  name: name
+  pass: pass
+  mail: mail
+  status: status
+  created: created
+  changed: changed
+  access: access
+  login: login
+  timezone: timezone
+  langcode: language
+  preferred_langcode: language
+  preferred_admin_langcode: language
+  init: init
+  field_firstname: firstname
+  field_lastname: lastname
+  'field_biography/value': biography_value
+  'field_biography/format':
+    plugin: static_map
+    bypass: true
+    source: biography_format
+    map:
+      1: plain_text
+      2: basic_html
+      3: full_html
+      4: full_html
